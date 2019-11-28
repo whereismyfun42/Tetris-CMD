@@ -1,4 +1,5 @@
 #include <iostream>
+#include <Windows.h>
 using namespace std;
 
 wstring tetromino[7];
@@ -56,6 +57,16 @@ int main()
 	tetromino[6].append(L".XX.");
 	tetromino[6].append(L".X..");
 	tetromino[6].append(L".X..");
+
+	pField = new unsigned char[nFieldWidth * nFieldHeight];
+
+	for (int x = 0; x < nFieldWidth; x++) 
+	{
+		for (int y = 0; y < nFieldHeight; y++) 
+		{
+			pField[y * nFieldWidth + x] = (x == 0 || x == nFieldWidth - 1 || y == nFieldHeight - 1) ? 9 : 0;
+		}
+	}
 	return 0;
 }
 
