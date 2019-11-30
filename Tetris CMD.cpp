@@ -7,6 +7,9 @@ int nFieldWidth = 12;
 int nFieldHeight = 18;
 unsigned char* pField = nullptr;
 
+int nScreenWidth = 80;   //Console window screen size (columns)
+int nScreenHeight = 30;   //Console window screen size (rows)
+
 int Rotate(int px, int py, int r) 
 {
 	switch (r % 4)
@@ -66,6 +69,15 @@ int main()
 		{
 			pField[y * nFieldWidth + x] = (x == 0 || x == nFieldWidth - 1 || y == nFieldHeight - 1) ? 9 : 0;
 		}
+	}
+
+	wchar_t* screen = new wchar_t[nScreenWidth * nScreenHeight];
+	for (int i = 0; i < nScreenWidth * nScreenHeight; i++) 
+	{
+		screen[i] = L'';
+		HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+		SetConsoleActiveScreenBuffer(hConsole);
+		DWORD dwBytesWritten = 0;
 	}
 	return 0;
 }
